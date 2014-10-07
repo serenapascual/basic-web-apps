@@ -1,36 +1,51 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Social Wall</title>
-    <meta charset="UTF-8">
-
-    <link rel="stylesheet" type="text/css" href="normalize.css">
-    <link rel="stylesheet" type="text/css" href="main.css">
-  </head>
-  <body>
-    <div id="page">
-      <h1>Social Wall</h1>
-      <form id="message-form" method="POST" action="/messages">
-        <textarea id="message-body" name="body" placeholder="Enter a message here."></textarea>
-        <button type="submit">Post Message</button>
-      </form>
-      <% if messages.empty? %>
-        <h2>Sorry, no messages. :(</h2>
-      <% else %>
-        <h2>Messages</h2>
-        <ol class="message-list">
-          <% messages.each do |message| %>
-            <li>
-              <div class="message-body">
-                <%= message.body %>
-              </div>
-              <div class="message-timestamp">
-                Posted on <%= message.created_at.strftime("%B %d, %Y at %l:%M%p") %>
-              </div>
-            </li>
-          <% end %>
-        </ol>
+<div id="bake_app">
+  <h1>Welcome.</h1>
+  <ul>
+  <li><a href='/waffles'>show me waffles</a></li>
+  <li><a href='/waffles/chocolate'>show me chocolate</a></li>
+  <li><a href='/lets_bake'>let's bake!</a></li>
+  </ul>
+</div>
+<div id="page">
+  <h1>Wall</h1>
+  <form id="message-form" method="POST" action="/messages">
+    <textarea id="message-body" name="body" placeholder="Enter a message here."></textarea>
+    <button type="submit">Post Message</button>
+  </form>
+  <% if messages.empty? %>
+    <h2>Sorry, no messages. :(</h2>
+  <% else %>
+    <h2>Messages</h2>
+    <ol class="message-list">
+      <% messages.each do |message| %>
+        <% if message.shown == 0 then %>
+        <li>
+          <div class="message-body">
+            <%= message.body %>
+          </div>
+          <div class="message-timestamp">
+            Posted on <%= message.created_at.strftime("%B %d, %Y at %l:%M%p") %>
+          </div>
+          <div class="message-actions">
+              <form action="/messages/<%= message.id %>/upvote" method="POST">
+                <strong>Upvotes: <%= message.upvotes %></strong>
+                <button type="submit">&#8593;</button>
+              </form>
+              
+              <form action="/messages/<%= message.id %>/downvote" method="POST">
+                <strong>Downvotes: <%=message.downvotes%></strong>
+                <button type="submit">&#8595;</button>
+              </form>
+          </div>
+          <div class="message-actions">
+              <form action="/messages/ <%= message.id %>/delete" method="POST">
+                <button type="delete">Delete</strong>
+              </form>
+          </div>
+          </br>
+        </li>
+        <% end %>
       <% end %>
-    </div>
-  </body>
-</html>
+    </ol>
+  <% end %>
+</div>

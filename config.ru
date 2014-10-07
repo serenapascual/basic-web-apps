@@ -1,3 +1,3 @@
-require "./app"
+require "./bake-app"
 
 run Sinatra::Application

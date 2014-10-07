@@ -1,11 +1,17 @@
 body {
-  background-color: white;
+  background-color: BlanchedAlmond;
   color: rgb(32, 32, 32);
 }
 
+#bake_app {
+  margin-left:25%;
+  float:left;
+}
+
 #page {
-  margin: 20px auto;
-  width: 400px;
+  margin-right: 25%;
+  float: right;
+  width: 275px;
 }
 
 #message-form {
@@ -15,6 +21,12 @@ body {
 
 #message-form button[type="submit"] {
   margin-top: 10px;
+}
+
+#message-form button[type="delete"] {
+  margin-top: 10px;
+  position:relative;
+  right:0px;
 }
 
 #message-form #message-body {
