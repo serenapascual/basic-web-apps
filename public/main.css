@@ -23,12 +23,6 @@ body {
   margin-top: 10px;
 }
 
-#message-form button[type="delete"] {
-  margin-top: 10px;
-  position:relative;
-  right:0px;
-}
-
 #message-form #message-body {
   height: 100px;
   width: 100%;

@@ -9,7 +9,7 @@ class Message
   property :id,         Serial
   property :body,       Text,     required: true
   property :upvotes,    Integer,  required: true, default: 0
-  property :downvotes,  Integer,  required:true,  default: 0
+  property :downvotes,  Integer,  required: true,  default: 0
   property :shown,      Integer,  required: true, default: 0
   property :created_at, DateTime, required: true
   
@@ -60,9 +60,13 @@ end
 
 post("/messages/*/delete") do |message_id|
   message = Message.get(message_id)
-  puts message_id
   message.shown = 1
   
+  if message.save
+    redirect("/")
+  else
+    body("Error")
+  end
 end
   
   
